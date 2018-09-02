@@ -1,13 +1,13 @@
-version: 0.1.0.{build}
+version: 1.0.0.{build}
 os: Visual Studio 2017
 cache:
 - C:\vcpkg
 environment:
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
-  version: 17
+  version: 1.0.0
   matrix:
-    - TRIPLET: x86-windows-static-winssl
-#    - TRIPLET: x64-windows-static-winssl
+    - TRIPLET: x86-windows
+#    - TRIPLET: x64-windows
 #    - TRIPLET: x86-uwp
 #    - TRIPLET: x64-uwp
 #    - TRIPLET: arm-uwp
@@ -17,21 +17,18 @@ environment:
 install:
 - cmd: install.bat
 build_script:
-- cmd: >-
-    build.bat
-
-    package.bat
+- cmd: build.bat
 test: off
 artifacts:
-- path: '**\openloco*.zip'
-  name: Zip simplified archive
 - path: '**\vcpkg*.zip'
   name: Zip vcpkg archive
-- path: '**\vcpkg*.nupkg'
+- path: '**\*.nupkg'
   name: NuGet vcpkg archive
 deploy:
   provider: GitHub
-  artifact: '**\openloco-libs-v$(version)*.zip'
+  auth_token:
+    secure: 49K/y43epwh5Sb8uY1l/TbIFRPcEq6fraQaYGS0bgWQJfONznd6hCqPUCg7WSX16
+  artifact: '**\*.nupkg'
   draft: true
   prerelease: true
   on:
