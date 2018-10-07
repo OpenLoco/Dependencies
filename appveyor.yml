@@ -15,9 +15,9 @@ environment:
 #    - TRIPLET: arm64-windows
 #    - TRIPLET: arm64-uwp
 install:
-- cmd: install.bat
+- cmd: windows\install.bat
 build_script:
-- cmd: build.bat
+- cmd: windows\build.bat
 test: off
 artifacts:
 - path: '**\vcpkg*.zip'
