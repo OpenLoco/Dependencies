@@ -1,30 +1,18 @@
-diff --git a/ports/sdl2-mixer/CMakeLists.txt b/ports/sdl2-mixer/CMakeLists.txt
-index 6992521b..25aa22a9 100644
---- a/ports/sdl2-mixer/CMakeLists.txt
-+++ b/ports/sdl2-mixer/CMakeLists.txt
-@@ -68,6 +68,7 @@ add_library(SDL2_mixer
-     music_timidity.c
-     music_wav.c
-     native_midi/native_midi_common.c
-+    native_midi/native_midi_macosx.c
-     native_midi/native_midi_win32.c
-     version.rc)
- 
 diff --git a/ports/sdl2-mixer/CONTROL b/ports/sdl2-mixer/CONTROL
 index 7f953a2f..76692cd2 100644
 --- a/ports/sdl2-mixer/CONTROL
 +++ b/ports/sdl2-mixer/CONTROL
 @@ -1,4 +1,4 @@
  Source: sdl2-mixer
- Version: 2.0.2-4
+ Version: 2.0.2-5
  Description: Multi-channel audio mixer library for SDL.
 -Build-Depends: sdl2, libflac, mpg123, libmodplug, libvorbis
 +Build-Depends: sdl2
 diff --git a/ports/sdl2-mixer/portfile.cmake b/ports/sdl2-mixer/portfile.cmake
-index 9f6240bc..e95e4c0d 100644
+index c04d6365..fd2ae971 100644
 --- a/ports/sdl2-mixer/portfile.cmake
 +++ b/ports/sdl2-mixer/portfile.cmake
-@@ -12,10 +12,10 @@ vcpkg_configure_cmake(
+@@ -17,10 +17,10 @@ vcpkg_configure_cmake(
      SOURCE_PATH ${SOURCE_PATH}
      PREFER_NINJA
      OPTIONS
@@ -37,5 +25,5 @@ index 9f6240bc..e95e4c0d 100644
 +        -DSDL_MIXER_ENABLE_MOD=OFF       # libmodplug
 +        -DSDL_MIXER_ENABLE_OGGVORBIS=OFF # libvorbis
      OPTIONS_DEBUG
-         -DSDL_MIXER_SKIP_HEADERS=ON)
- 
+         -DSDL_MIXER_SKIP_HEADERS=ON
+ )
