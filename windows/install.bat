@@ -9,6 +9,6 @@ REM Uninstall out of date packages so they are updated
 .\vcpkg remove --outdated --recurse
 
 REM Reduce dependencies for SDL2-mixer
-git apply %~dp0sdl2_patches.patch
+git apply %~dp0\..\sdl2_patches.patch
 
 popd
