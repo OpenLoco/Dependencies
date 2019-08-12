@@ -5,8 +5,7 @@ git clone https://github.com/Microsoft/vcpkg
 cd vcpkg
 ./bootstrap-vcpkg.sh
 
-# Now, let's get our patches in
-git apply ../../sdl2_patches.patch
+# Prepare for x86 target
 cp ../x86-osx.cmake triplets/
 
 # Install dependencies
