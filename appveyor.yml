@@ -1,10 +1,10 @@
-version: 1.1.1.{build}
+version: 1.2.0.{build}
 os: Visual Studio 2017
 cache:
 - C:\vcpkg
 environment:
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
-  version: 1.1.1
+  version: 1.2.0
   matrix:
     - TRIPLET: x86-windows
 #    - TRIPLET: x64-windows
