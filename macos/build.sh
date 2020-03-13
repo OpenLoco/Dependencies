@@ -1,6 +1,15 @@
 #!/bin/bash
 
-# First, bootstrap vcpkg
+# Echo commands as they're executed
+set -x
+
+# Exit when any of the commands below fails
+set -e
+
+# First, install a newer version of gcc
+brew install gcc@8
+
+# Get vcpkg and bootstrap it
 git clone https://github.com/Microsoft/vcpkg
 cd vcpkg
 ./bootstrap-vcpkg.sh
