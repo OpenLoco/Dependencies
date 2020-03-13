@@ -1,16 +1,26 @@
 #!/bin/bash
 
-# First, bootstrap vcpkg
+# Echo commands as they're executed
+set -x
+
+# Exit when any of the commands below fails
+set -e
+
+# First, install a newer version of gcc
+brew install gcc@8
+
+# Get vcpkg and bootstrap it
 git clone https://github.com/Microsoft/vcpkg
 cd vcpkg
 ./bootstrap-vcpkg.sh
 
-# Now, let's get our patches in
-git apply ../../sdl2_patches.patch
+# Prepare for x86 target
 cp ../x86-osx.cmake triplets/
 
 # Install dependencies
-./vcpkg install sdl2:x86-osx \
+./vcpkg install \
+	libpng:x86-osx \
+	sdl2:x86-osx \
 	sdl2-mixer:x86-osx \
 	yaml-cpp:x86-osx
 
