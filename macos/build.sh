@@ -19,6 +19,8 @@ cp ../x86-osx.cmake triplets/
 
 # Install dependencies
 ./vcpkg install \
+	benchmark:x86-osx \
+	gtest:x86-osx \
 	libpng:x86-osx \
 	sdl2:x86-osx \
 	sdl2-mixer:x86-osx \
