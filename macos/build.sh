@@ -19,7 +19,7 @@ cp ../x86-osx.cmake triplets/
 
 # Install dependencies
 ./vcpkg install \
-	benchark:x86-osx \
+	benchmark:x86-osx \
 	gtest:x86-osx \
 	libpng:x86-osx \
 	sdl2:x86-osx \
