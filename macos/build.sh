@@ -1,31 +1,30 @@
 #!/bin/bash
 
-# Echo commands as they're executed
-set -x
-
-# Exit when any of the commands below fails
-set -e
+# Echo commands as they're executed, exit when any of the commands below fails
+set -ex
 
 # First, install a newer version of gcc
 brew install gcc@8
 
 # Get vcpkg and bootstrap it
-git clone https://github.com/Microsoft/vcpkg
-cd vcpkg
+git clone -q https://github.com/Microsoft/vcpkg
+pushd vcpkg
 ./bootstrap-vcpkg.sh
 
 # Prepare for x86 target
-cp ../x86-osx.cmake triplets/
+VCPKG_DEFAULT_TRIPLET=x86-osx
+cp ../macos/${VCPKG_DEFAULT_TRIPLET}.cmake triplets/
 
 # Install dependencies
 ./vcpkg install \
-	benchmark:x86-osx \
-	gtest:x86-osx \
-	libpng:x86-osx \
-	sdl2:x86-osx \
-	sdl2-mixer:x86-osx \
-	yaml-cpp:x86-osx
+	benchmark \
+	gtest \
+	libpng \
+	sdl2 \
+	sdl2-mixer \
+	yaml-cpp
 
 # Zip the lot
 zip -r ../macos.dependencies.zip .vcpkg-root installed/ scripts/
-cd ..
+
+popd
