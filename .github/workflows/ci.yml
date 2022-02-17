@@ -1,27 +1,61 @@
 name: CI
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
+env:
+  VCPKG_DISABLE_METRICS: 1
+  VERSION: 1.4.0
 jobs:
   windows:
     name: Windows
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        VCPKG_DEFAULT_TRIPLET: [x86-windows]
     env:
       CONFIGURATION: Release
-      TRIPLET: x86-windows
-      VERSION: 1.4.0
+      VCPKG_DEFAULT_TRIPLET: ${{ matrix.VCPKG_DEFAULT_TRIPLET }}
+      POWERSHELL_TELEMETRY_OPTOUT: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Build dependencies
-        run: windows\install.bat
+        run: windows\install
       - name: Build artifacts
-        run: windows\build.bat
-      - name: Upload vcpkg archive (Zip)
+        run: windows\build
+      - name: Upload vcpkg archive (zip)
         uses: actions/upload-artifact@v2
         with:
-          name: Zip vcpkg archive
+          name: ${{ matrix.VCPKG_DEFAULT_TRIPLET }} vcpkg archive (zip)
           path: '**\vcpkg*.zip'
+          if-no-files-found: error
       - name: Upload vcpkg archive (NuGet)
         uses: actions/upload-artifact@v2
         with:
-          name: NuGet vcpkg archive
+          name: ${{ matrix.VCPKG_DEFAULT_TRIPLET }} vcpkg archive (NuGet)
           path: '**\*.nupkg'
+          if-no-files-found: error
+#  macos:
+#    name: macOS
+#    runs-on: macos-latest
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        VCPKG_DEFAULT_TRIPLET: [x86-osx]
+#    env:
+#      CONFIGURATION: Release
+#      VCPKG_DEFAULT_TRIPLET: ${{ matrix.VCPKG_DEFAULT_TRIPLET }}
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0
+#      - name: Build dependencies
+#        run: macos/build.sh
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: ${{ matrix.VCPKG_DEFAULT_TRIPLET }} vcpkg archive (zip)
+#          path: macos.dependencies.zip
+#          if-no-files-found: error
