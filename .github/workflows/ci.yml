@@ -28,13 +28,13 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.VCPKG_DEFAULT_TRIPLET }} vcpkg archive (zip)
-          path: '**\vcpkg*.zip'
+          path: '.\vcpkg\vcpkg*.zip'
           if-no-files-found: error
       - name: Upload vcpkg archive (NuGet)
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.VCPKG_DEFAULT_TRIPLET }} vcpkg archive (NuGet)
-          path: '**\*.nupkg'
+          path: '.\vcpkg\*.nupkg'
           if-no-files-found: error
 #  macos:
 #    name: macOS
