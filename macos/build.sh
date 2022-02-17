@@ -22,7 +22,8 @@ cp ../macos/${VCPKG_DEFAULT_TRIPLET}.cmake triplets/
 	libpng \
 	sdl2 \
 	sdl2-mixer \
-	yaml-cpp
+	yaml-cpp \
+	openal-soft
 
 # Zip the lot
 zip -r ../macos.dependencies.zip .vcpkg-root installed/ scripts/

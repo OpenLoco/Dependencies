@@ -10,6 +10,7 @@ $packages=@(
     "sdl2";
     "sdl2-mixer";
     "yaml-cpp";
+    "openal-soft";
 )
 
 # Install libraries
