@@ -12,18 +12,17 @@ pushd vcpkg
 ./bootstrap-vcpkg.sh
 
 # Prepare for x86 target
-VCPKG_DEFAULT_TRIPLET=x86-osx
-cp ../macos/${VCPKG_DEFAULT_TRIPLET}.cmake triplets/
+cp ../x86-osx.cmake triplets/
 
 # Install dependencies
 ./vcpkg install \
-	benchmark \
-	gtest \
-	libpng \
-	sdl2 \
-	sdl2-mixer \
-	yaml-cpp \
-	openal-soft
+	benchmark:x86-osx \
+	gtest:x86-osx \
+	libpng:x86-osx \
+	sdl2:x86-osx \
+	sdl2-mixer:x86-osx \
+	yaml-cpp:x86-osx \
+	openal-soft:x86-osx
 
 # Zip the lot
 zip -r ../macos.dependencies.zip .vcpkg-root installed/ scripts/
