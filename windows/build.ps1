@@ -7,10 +7,9 @@ $packages=@(
     "breakpad";
     "gtest";
     "libpng";
-    "sdl2";
-    "sdl2-mixer";
-    "yaml-cpp";
     "openal-soft";
+    "sdl2";
+    "yaml-cpp";
 )
 
 # Install libraries
